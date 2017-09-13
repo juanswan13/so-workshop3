@@ -1,7 +1,7 @@
 ### Taller 3
 **Universidad ICESI**  
 **Curso:** Sistemas Operativos  
-**Docente:** Daniel Barragán C. 
+**Docente:** Daniel Barragán C.  
 **Estudiante:** Juan Camilo Swan  
 **Tema:** Llamadas al sistema (syscalls)  
 ### Objetivos
