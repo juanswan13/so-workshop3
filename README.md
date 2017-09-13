@@ -1,9 +1,9 @@
 ### Taller 3
 **Universidad ICESI**  
 **Curso:** Sistemas Operativos  
-**Docente:** Daniel Barragán C.  
+**Docente:** Daniel Barragán C. 
+**Estudiante:** Juan Camilo Swan  
 **Tema:** Llamadas al sistema (syscalls)  
-**Correo:** daniel.barragan at correo.icesi.edu.co
 ### Objetivos
 * Conocer y explicar la función de las llamadas al sistema en un sistema operativo
 ### Prerrequisitos
