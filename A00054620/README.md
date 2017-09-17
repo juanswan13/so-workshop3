@@ -49,7 +49,32 @@ Parametros:
 
   
 
-2. Realice la compilación del código fuente adjunto y su ejecución empleando el aplicativo **strace**. Identifique las llamadas al sistema encargadas de enviar y recibir datos a través de la red. A partir de los manuales de Linux en Internet o del sistema operativo explique las llamadas al sistema encontradas y sus parámetros.
+2. Realice la compilación del código fuente adjunto y su ejecución empleando el aplicativo **strace**. Identifique las llamadas al sistema encargadas de enviar y recibir datos a través de la red. A partir de los manuales de Linux en Internet o del sistema operativo explique las llamadas al sistema encontradas y sus parámetros.  
+
+* Para completar este punto primero se descargaron las librerias correspondientes y luego se implementó y complió el algoritmo brindado curl.c. posteriormente con la herramienta strace se analizaron sus syscallls.  
+   ![][7]  
+  
+* **connect(sockfd, struct sockaddr serv_addr, addrlen):** sockfd es nuestro famoso descriptor de fichero de socket, serv_addr es una estructura struct sockaddr que contiene el puerto y la dirección IP de destino, y a addrlen le podemos asignar el valor del tamaño del serv_addr.  
+   ![][8]  
+* **socket(int domain, int type, int protocol):** Devuelve el descriptor del fichero tal y como lo hacía la llamada al sistema open.  
+	*Domain: describe una dirección de la familia de direcciones con la que se hace conexión, una dirección perteneciente a AF_INET.  
+	*Type: Le dice al sistema operativo que tipo de socket es este.  
+	*Protocol: le dice al sistema operativo median que protocolo se abrirá el socket.    
+   ![][9]  
+* **recvfrom(sockfd, buf, len, flags, struct sockaddr from, fromlen):** sockfd es el descriptor del fichero del que se va a leer, buff es el buffer donde se va a depositar la información leida, len es la longitud máxima del buffer, y flags, son las banderas del mensaje; que habitualmente van en cero, from es un puntero a una estructura struct sockaddr local que será rellenada con la dirección IP y el puerto de la máquina de origen. fromlen es un puntero a un int local que tiene el tamaño del from. Devuelve el número de bytes recibidos, o -1 en caso de error.  
+   ![][10]  
+* **getpeername(sockfd, struct sockaddr addr, addrlen):** Dirá quién está al otro lado de un socket de flujo conectado.
+sockfd es el descriptor del socket de flujo conectado, addr es un puntero a una estructura struct sockaddr que guardará la información acerca del otro lado de la conexión, y addrlen es un puntero a un int, que almacena el tamaño del addr. La función devuelve -1 en caso de error.  
+  ![][11]  
+* **sendto(sockfd, msg,  len, flags, to, tolen):** sockfd es el descriptor de socket al que quieres enviar datos. msg es un puntero a los datos que quieres enviar, y len es la longitud de esos datos en bytes, flags son las banderas del mensaje; que habitualmente van en cero, to es un puntero a una estructura struct sockaddr que contiene la dirección IP y el puerto de destino, tolen es el tamaño que puede tomar la estructura to.  
+Devuelve el número de bytes que realmente se enviaron  o -1 en caso de error.  
+  ![][12]  
+* **Getsockname(sockname, size):** hostname es un puntero a una cadena de carácteres donde se almacenará el nombre del socket cuando la función retorne, y size es la longitud en bytes de esa cadena de caracteres.
+La función devuelve 0 si se completa sin errores, y -1 en caso contrario.  
+  ![][13]  
+   
+   
+
 **Nota:** Cuando compile programas tenga en cuenta que estos pueden necesitar la instalación de librerías para su compilación y ejecución.
  	
 **Debian**
@@ -74,6 +99,7 @@ El informe debe ser entregado en formato README.md y debe ser subido a un reposi
 * http://sopa.dis.ulpgc.es/ii-dso/leclinux/miscelaneos/llamadas/LEC_llamadas.pdf  
 * http://sopa.dis.ulpgc.es/ii-dso/leclinux/fs/readwrite/LEC20_READWRITE.pdf  
 * https://www.lifewire.com/linux-command-open-4091951  
+*http://www.tyr.unlu.edu.ar/tyr/TYR-trab/satobigal/documentacion/beej/syscalls.html  
 
 
 [1]: images/Taller3Strace1.PNG
@@ -82,3 +108,10 @@ El informe debe ser entregado en formato README.md y debe ser subido a un reposi
 [4]: images/Taller3StraceWrite.PNG
 [5]: images/Taller3StraceAccess.PNG
 [6]: images/Taller3StraceGetDents.PNG
+[7]: images/Taller3StraceCurl.PNG
+[8]: images/Taller3Connect.PNG
+[9]: images/Taller3Socket.PNG
+[10]: images/Taller3Recvfrom.PNG
+[11]: images/Taller3getpeername.PNG
+[12]: images/Taller3sendto.PNG
+[13]: images/Taller3getsockname.PNG
